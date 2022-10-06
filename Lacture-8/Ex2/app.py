@@ -1,18 +1,18 @@
-#This file we will be using model01 since the name will duplicate with models . 
-from models1 import Base , Member
+#This file we will be using model1 since the name will duplicate with models . 
+from models import Base , Member
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import datetime
 
 #Create engine 
-
-db_uri = 'sqlite///Ex.db'
+# echo = ถ้ามีอะไรผิดปกติจะไม่แสดงขึ้นมา
+db_uri = 'sqlite:///Ex.sqlite3'
 engine =create_engine(db_uri,echo = False)
 
 
 
 #Create all table
-#Base.metdata.drop_all(engine)
+Base.metadata.drop_all(engine)
 Base.metadata.create_all(engine)
 
 

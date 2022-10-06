@@ -1,5 +1,5 @@
 #Last Example between Test 1 to Test4 
-
+#Search information 
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -7,7 +7,7 @@ from models  import Base,User
 
 
 
-engine = create_engine("sqlite:///user.db",echo = False)
+engine = create_engine("sqlite:///user.sqlite3",echo = False)
 
 
 Session = sessionmaker(bind=engine)

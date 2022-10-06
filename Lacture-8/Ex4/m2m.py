@@ -4,7 +4,7 @@ from sqlalchemy import Column , Integer , String , ForeignKey
 from sqlalchemy.orm import sessionmaker , relationship , backref
 import uuid
 
-engine = sqlalchemy.create_engine('sqlite:///po.db')
+engine = sqlalchemy.create_engine('sqlite:///Ex4.sqlite3')
 Base = declarative_base()
 
 class Order_Product(Base):
@@ -28,7 +28,7 @@ class Order_Product(Base):
         return '<Order_Product {}>'.format(self.order.name+" "+self.product.name)
 
 class Product(Base):
-    __tablename__ = "orders"
+    __tablename__ = "products"
     id = Column(String(35), primary_key=True, unique = True)
     name = Column(String(80), nullable=False)
 
@@ -53,7 +53,7 @@ class Order(Base):
 
     def add_products(self,items):
         for product , qty in items:
-            self.order_product.append(Order_Product(
+            self.order_products.append(Order_Product(
                 order=self, product=product ,quantity=qty
             ))
     
@@ -72,15 +72,15 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 prod1 = Product(name="Oreo")
-prod2 = Product(name="Hide and Seek")
-prod3 = Product(name="Marie")
-prod4 = Product(name="Good Day")
+prod2 = Product(name="Ley")
+prod3 = Product(name="Testo")
+prod4 = Product(name="Snack Jack")
 
 session.add_all([prod1,prod2,prod3,prod4])
 session.commit()
 
-order1 = Order(name="First Order")
-order2 = Order(name="Second Order")
+order1 = Order(name="Joe Order")
+order2 = Order(name="Sarah Order")
 
 order1.add_products([(prod1, 4),(prod2 ,5),(prod3, 4)])
 order2.add_products([(prod2, 6),(prod1 ,1),(prod3, 2),(prod4, 1)])

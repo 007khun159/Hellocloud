@@ -1,5 +1,5 @@
 from crud import Session
-from models2  import Book
+from models  import Book
 
 s = Session()
 
