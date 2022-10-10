@@ -13,12 +13,12 @@ class Pet(Base):
     __tablename__ = 'pettable'
     Id_pet  = Column(String(4),primary_key = True)
     pet_name = Column(String(5),nullable = False)
-    owner  = Column(String(10),ForeignKey('Owner.owner_name'))
+    owner  = Column(String(10),ForeignKey('Owner.owner_name'),unique=True)
 
 
 class Owner(Base):
     owner_id = Column(String(5),primary_key = True)
-    owner_name = Column(String(10),nullable =False)
+    owner_name = Column(String(10),nullable =False,unique=True)
 
     posting_owner = relationship('Pet',backref='owner')
 
