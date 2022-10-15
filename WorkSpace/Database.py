@@ -9,64 +9,41 @@ Engine = sqlalchemy.create_engine('sqlite:/// Workspace.sqlite3')
 Base = declarative_base()
 
 
-#Student Class 
 class Student(Base):
     __tablename__ = 'students'
-    
-    student_id = Column(String(13),primary_key = True ,nullable = False)
-    f_name = Column(String(60),nullable = False)
-    l_name = Column(String(60), nullable = False)
-    email = Column(String(50),nullable = False)
-    
-
-    def __repr__(self):
-        return "<User(student_id ='%s',f_name = '%s',l_name = '%s')>"%(
-            self.student_id , self.f_name , self.l_name)
+    student_id = Column(String(13), primary_key=True)
+    f_name = Column(String(60), nullable=False)
+    l_name = Column(String(60), nullable=False)
+    email = Column(String(50), nullable=False)
+    subjects = relationship('Registration', backref='student')
 
 
-#Teachers Class
 class Teachers(Base):
     __tablename__ = 'teachers'
-    teacher_id = Column(String(3),primary_key = True )
-    f_name = Column(String(20), nullable = False)
-    l_name  = Column(String(20),nullable = False)
-    email = Column(String(50),nullable = False)
-
-    
-
-    def __repr__(self):
-        return "<User(teacher_id ='%s',f_name = '%s',l_name = '%s')>"%(
-            self.teacher_id , self.f_name , self.l_name)
-    
-
-#Subject Class 
+    teacher_id = Column(String(3), primary_key=True)
+    f_name = Column(String(20), nullable=False)
+    l_name = Column(String(20), nullable=False)
+    email = Column(String(50), nullable=False)
+    courses = relationship('Subjects', backref='teacher')  
 
 class Subjects(Base):
     __tablename__ = 'subjects'
-    subject_id = Column(String(15), primary_key = True)
-    subject_name = Column(String(50),nullable = False)
-    creadit = Column(Integer,nullable = False)
-    teacher_id = Column(String(3),nullable = False)
+    subject_id = Column(String(15), primary_key=True)
+    subject_name = Column(String(50), nullable=False)
+    creadit = Column(Integer, nullable=False)
+    teacher_id = Column(ForeignKey('teachers.teacher_id'), nullable=False)
+    registrations = relationship('Registration', backref='subject')
 
-
-    def __repr__(self):
-        return "<User(subject_id ='%s',subject_name = '%s',creadit = '%s',teacher_id = '%s')>"%(
-            self.subject_id , self.subject_id , self.creadit , self.teacher_id)
-    
 
 class Registration(Base):
-
     __tablename__ = 'registration'
-    id = Column(Integer,primary_key = True,nullable =False)
-    student_id = Column(String(13),nullable = False)
-    subject_id = Column(String(15),nullable = False)
-    year = Column(String(4),nullable = False)
-    semester  = Column(String(2) ,nullable = False)
-    grade  = Column(String(2),nullable   = False)
-    
-    def __repr__(self):
-        return "<User(student_id ='%s',subject_id = '%s',year = '%s', semester = '%s',grade ='%s' )>"%(
-            self.student_id , self.subject_id , self.year , self.semester,self.grade)
+    id = Column(Integer, primary_key=True, nullable=False)
+    student_id = Column(ForeignKey('students.student_id'), nullable=False)
+    subject_id = Column(ForeignKey('subjects.subject_id'), nullable=False)
+    year = Column(String(4), nullable=False)
+    semester = Column(String(2), nullable=False)
+    grade = Column(String(2), nullable=False)
+
 
 
 
@@ -96,8 +73,8 @@ subject3 = Subjects(subject_id = '060233205	',subject_name = 'ADVANCED NETWORK A
 
 register1 = Registration(student_id = '6406022610031' , subject_id = '060233113', year = '2022' , semester =  '1',grade='+A')
 register2 =Registration(student_id = '6406022610031' , subject_id = '060233201', year =  '2022' , semester =  '1',grade='C')
-register3 = Registration(student_id = '6406022610040' , subject_id = '060233205', year = '2022' , semester =  '1',grade='B')
-register4 = Registration(student_id = '6406022610040' , subject_id = '060233205', year = '2022' , semester =  '1',grade='A')
+register3 = Registration(student_id = '6406022610040' , subject_id = '060233201', year = '2022' , semester =  '1',grade='B')
+register4 = Registration(student_id = '6406022610040' , subject_id = '060233113', year = '2022' , semester =  '1',grade='A')
 register5 = Registration(student_id = '6406022610032' , subject_id = '060233201', year = '2022' , semester =  '1',grade='+B')
 register6 = Registration(student_id = '6406022610032' , subject_id = '060233113', year = '2022' , semester =  '1',grade='+C')
 

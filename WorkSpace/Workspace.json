@@ -1,0 +1,9 @@
+[
+    {"stmt":"Select students.student_id , students.f_name , students.l_name, registration.subject_id ,\nsubjects.subject_name,registration.grade,teachers.f_name,teachers.l_name\n \n From students\n join registration on students.student_id = registration.student_id\n join subjects on registration.subject_id = subjects.subject_id\n join teachers on subjects.teacher_id  = teachers.teacher_id\n \n \n \n ;",
+    "header":["student_id","f_name","l_name","subject_id","subject_name","grade","f_name","l_name"],
+    "rows":[["6406022610031","Papop","Sangeamsak","060233113","ADVANCED COMPUTER PROGRAMMIN","+A","Anirach","Mingkwan"],
+    ["6406022610031","Papop","Sangeamsak","060233201","NETWORK ENGINEERING LABORATO","C","Warachai","Kongsiriwatana"],
+    ["6406022610040","Pawarit","Pitirit","060233201","NETWORK ENGINEERING LABORATO","B","Warachai","Kongsiriwatana"],
+    ["6406022610040","Pawarit","Pitirit","060233113","ADVANCED COMPUTER PROGRAMMIN","A","Anirach","Mingkwan"],
+    ["6406022610032","Nititat","Banpha","060233201","NETWORK ENGINEERING LABORATO","+B","Warachai","Kongsiriwatana"],
+    ["6406022610032","Nititat","Banpha","060233113","ADVANCED COMPUTER PROGRAMMIN","+C","Anirach","Mingkwan"]]}]
