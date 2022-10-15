@@ -8,14 +8,14 @@ import uuid
 Engine = sqlalchemy.create_engine('sqlite:/// Workspace.sqlite3')
 Base = declarative_base()
 
-
+#All Table 
 class Student(Base):
     __tablename__ = 'students'
     student_id = Column(String(13), primary_key=True)
     f_name = Column(String(60), nullable=False)
     l_name = Column(String(60), nullable=False)
     email = Column(String(50), nullable=False)
-    subjects = relationship('Registration', backref='student')
+    registing_student = relationship('Registration', backref='student')
 
 
 class Teachers(Base):
@@ -24,7 +24,7 @@ class Teachers(Base):
     f_name = Column(String(20), nullable=False)
     l_name = Column(String(20), nullable=False)
     email = Column(String(50), nullable=False)
-    courses = relationship('Subjects', backref='teacher')  
+    registing_teacher_id = relationship('Subjects', backref='teacher')  
 
 class Subjects(Base):
     __tablename__ = 'subjects'
@@ -32,7 +32,7 @@ class Subjects(Base):
     subject_name = Column(String(50), nullable=False)
     creadit = Column(Integer, nullable=False)
     teacher_id = Column(ForeignKey('teachers.teacher_id'), nullable=False)
-    registrations = relationship('Registration', backref='subject')
+    registing_subject_id = relationship('Registration', backref='subject')
 
 
 class Registration(Base):
@@ -80,11 +80,11 @@ register6 = Registration(student_id = '6406022610032' , subject_id = '060233113'
 
 
 
-list_all  = [student1,student2,student3, teacher1,teacher2,teacher3,subject1,
+list_information  = [student1,student2,student3, teacher1,teacher2,teacher3,subject1,
             subject2,subject3,register1,register2,register3,register4,register5,register6]
 
 
-for i in list_all:
+for i in list_information:
     session.add(i)
 
 session.commit()
