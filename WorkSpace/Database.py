@@ -15,7 +15,7 @@ class Student(Base):
     f_name = Column(String(60), nullable=False)
     l_name = Column(String(60), nullable=False)
     email = Column(String(50), nullable=False)
-    registing_student = relationship('Registration', backref='student')
+    registing_student_id = relationship('Registration', backref='student')
 
 
 class Teachers(Base):
@@ -25,6 +25,9 @@ class Teachers(Base):
     l_name = Column(String(20), nullable=False)
     email = Column(String(50), nullable=False)
     registing_teacher_id = relationship('Subjects', backref='teacher')  
+
+
+
 
 class Subjects(Base):
     __tablename__ = 'subjects'
