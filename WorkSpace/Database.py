@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker,relationship,backref
 import uuid
 
 
-Engine = sqlalchemy.create_engine('sqlite:/// Workspace.sqlite3')
+Engine = sqlalchemy.create_engine('sqlite:///Workspace.sqlite3')
 Base = declarative_base()
 
 #All Table 
@@ -18,6 +18,11 @@ class Student(Base):
     registing_student_id = relationship('Registration', backref='student')
 
 
+    def __rerp__(self):
+        return "<Book(student_id = '{}' , f_name ='{}', l_name =  '{}'  , email = '{}' )>"\
+            .format(self.student_id , self.f_name , self.l_name , self.email )
+
+
 class Teachers(Base):
     __tablename__ = 'teachers'
     teacher_id = Column(String(3), primary_key=True)
@@ -26,6 +31,9 @@ class Teachers(Base):
     email = Column(String(50), nullable=False)
     registing_teacher_id = relationship('Subjects', backref='teacher')  
 
+    def __rerp__(self):
+        return "<Book(teacher_id= '{}' , f_name ='{}', l_name =  '{}'  , email = '{}' )>"\
+            .format(self.teacher_id , self.f_name , self.l_name , self.email )
 
 
 
@@ -36,6 +44,11 @@ class Subjects(Base):
     creadit = Column(Integer, nullable=False)
     teacher_id = Column(ForeignKey('teachers.teacher_id'), nullable=False)
     registing_subject_id = relationship('Registration', backref='subject')
+    
+    def __rerp__(self):
+        return "<Book(subject_id= '{}' , subject_name ='{}', creadit =  '{}'  , teacher_id = '{}' )>"\
+            .format(self.teacher_id , self.subject_name , self.creadit , self.teacher_id )
+
 
 
 class Registration(Base):
@@ -46,6 +59,11 @@ class Registration(Base):
     year = Column(String(4), nullable=False)
     semester = Column(String(2), nullable=False)
     grade = Column(String(2), nullable=False)
+
+
+    def __rerp__(self):
+        return "<Book(id= '{}' , student_id ='{}', subject_id =  '{}'  , year  = '{}' , semester = '{}' ,  grade = '{}')>"\
+            .format(self.id , self.student_id , self.subject_id , self.year  , self)
 
 
 

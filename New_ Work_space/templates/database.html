@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table style="width: 100%">
+        <tr>
+            <th>student_id</th>
+            <th>f_name</th>
+            <th>l_name</th>
+            <th>email</th>
+        </tr>
+        {% for row in MCQTable %}
+        <tr>
+            <th>{{ row["student_id"] }}</th>
+            <th>{{ row["f_name"] }}</th>
+            <th>{{ row["l_name"] }}</th>
+            <th>{{ row["email"] }}</th>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
