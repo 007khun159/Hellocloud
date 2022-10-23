@@ -27,11 +27,11 @@ def index():
 
 @app.route('/process',methods =['Post'])
 def process():
-    id = request.form['student_id']
+    student_id= request.form['student_id']
     f_name = request.form['f_name']
     l_name = request.form['l_name']
     e_mail = request.form['e_mail']
-    signature = Students(id=id , f_name = f_name , l_name = l_name , e_mail = e_mail)
+    signature = Students(student_id=student_id , f_name = f_name , l_name = l_name , e_mail = e_mail)
     db.session.add(signature)
     db.session.commit()
     return redirect(url_for('index'))
