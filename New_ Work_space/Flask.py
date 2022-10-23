@@ -13,7 +13,7 @@ db = SQLAlchemy(app)
 
 class Students(db.Model):
     tablename  = 'Students'
-    id = Column(CHAR(13),primary_key = True)
+    student_id = Column(CHAR(13),primary_key = True)
     f_name = Column(VARCHAR(30))
     l_name = Column(VARCHAR(30))
     e_mail = Column(VARCHAR(50))
