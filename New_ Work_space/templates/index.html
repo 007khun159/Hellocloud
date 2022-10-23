@@ -14,14 +14,14 @@
             <a type="button" class="btn btn-link" href="{{ url_for('sign') }}">Sing the Guest Book</a>
         </div>
 
-        {% for r in result %}
+        {% for student in students %}
         <div class="page-header">
-            <h1>{{ r.id }}</h1>
+            <h1>{{ student.id }}</h1>
         </div>
         <div class="well">
-            <p>{{ r.f_name }}</p>
-            <p>{{ r.l_name }}</p>
-            <p>{{ r.e_mail }}</p>
+            <p>{{ student.f_name }}</p>
+            <p>{{ student.l_name }}</p>
+            <p>{{ student.e_mail }}</p>
         </div>
         {% endfor %}
 
