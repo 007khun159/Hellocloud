@@ -5,7 +5,7 @@ from sqlalchemy import Column, Integer, String,VARCHAR,CHAR
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']='postgresql://webadmin:YKQnti46682@10.104.9.211:5432/workspace'
+app.config['SQLALCHEMY_DATABASE_URI']='postgresql://webadmin:YKQnti46682@10.104.9.211:11256/workspace'
 app.config['SQLALCHEMY_TRACK_MODIFICATION']= False
 
 db = SQLAlchemy(app)
@@ -22,8 +22,9 @@ class Students(db.Model):
 @app.route('/')
 def index():
     result = Students.query.all()
+    print(result)
     return render_template('index.html',result = result)
-
+    
 
 @app.route('/process',methods =['Post'])
 def process():
@@ -39,4 +40,5 @@ def process():
 
 if __name__ == "__main__":
     
-     app.run(host = '0.0.0.0',port = 80,debug = True)
+    app.run(host = '0.0.0.0',port = 80,debug = True)
+     
