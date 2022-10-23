@@ -11,7 +11,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATION']= False
 db = SQLAlchemy(app)
 
 
-class Student(db.Model):
+class Students(db.Model):
     tablename  = 'Students'
     id = Column(CHAR(13),primary_key = True)
     f_name = Column(VARCHAR(30))
@@ -21,7 +21,7 @@ class Student(db.Model):
      
 @app.route('/')
 def index():
-    result = Student.query.all()
+    result = Students.query.all()
     return render_template('index.html',result = result)
 
 
@@ -31,7 +31,7 @@ def process():
     f_name = request.form['f_name']
     l_name = request.form['l_name']
     e_mail = request.form['e_mail']
-    signature = Student(id=id , f_name = f_name , l_name = l_name , e_mail = e_mail)
+    signature = Students(id=id , f_name = f_name , l_name = l_name , e_mail = e_mail)
     db.session.add(signature)
     db.session.commit()
     return redirect(url_for('index'))
