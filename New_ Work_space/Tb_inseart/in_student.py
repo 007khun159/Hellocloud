@@ -1,4 +1,5 @@
 import psycopg2
+import 
 
 try:
     connection= psycopg2.connect(user ='webadmin',
@@ -17,12 +18,13 @@ try:
                         ,'6406022610031@fitm.kmutnb.ac.th')
 
 
-    cursor.execute(postgres_insert_query,record_to_insert3)
+    # cursor.execute(postgres_insert_query,record_to_insert3)
 
-    connection.commit()
-    count = cursor.rowcount
-    print(count,"Record inserted successfully into students table")
+    #connection.commit()
+    #count = cursor.rowcount
+    #print(count,"Record inserted successfully into students table")
 
+    result = Students.query.all()
 
 except (Exception,psycopg2.Error) as error: 
     if (connection):

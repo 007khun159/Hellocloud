@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker,relationship,backref
 import uuid
 
 
-Engine = sqlalchemy.create_engine('sqlite:///Workspace.sqlite3')
+Engine = sqlalchemy.create_engine('postgresql://webadmin:YKQnti46682@node36984-env-papop.proen.app.ruk-com.cloud:11256/newingwork_space')
 Base = declarative_base()
 
 #All Table 
@@ -90,12 +90,12 @@ teacher3 = Teachers(teacher_id ='KNM',f_name = 'Kanitta',l_name ='Namee',email =
 
 subject1 = Subjects(subject_id = '060233113',subject_name = 'ADVANCED COMPUTER PROGRAMMIN', creadit =  3 ,teacher_id = 'AMK'  )
 subject2 = Subjects(subject_id = '060233201',subject_name = 'NETWORK ENGINEERING LABORATO', creadit =  1 ,teacher_id = 'WKN' )
-subject3 = Subjects(subject_id = '060233205	',subject_name = 'ADVANCED NETWORK AND PROTOCO', creadit = 3 ,teacher_id = 'KNM' )
+subject3 = Subjects(subject_id = '060233205',subject_name = 'ADVANCED NETWORK AND PROTOCO', creadit = 3 ,teacher_id = 'KNM' )
 
 register1 = Registration(student_id = '6406022610031' , subject_id = '060233113', year = '2022' , semester =  '1',grade='+A')
-register2 =Registration(student_id = '6406022610031' , subject_id = '060233201', year =  '2022' , semester =  '1',grade='C')
-register3 = Registration(student_id = '6406022610040' , subject_id = '060233201', year = '2022' , semester =  '1',grade='B')
-register4 = Registration(student_id = '6406022610040' , subject_id = '060233113', year = '2022' , semester =  '1',grade='A')
+register2 = Registration(student_id = '6406022610031' , subject_id = '060233201', year =  '2022' , semester =  '1',grade='C')
+register3 = Registration(student_id = '6406022610040' , subject_id = '060233205', year = '2022' , semester =  '1',grade='B')
+register4 = Registration(student_id = '6406022610040' , subject_id = '060233205', year = '2022' , semester =  '1',grade='A')
 register5 = Registration(student_id = '6406022610032' , subject_id = '060233201', year = '2022' , semester =  '1',grade='+B')
 register6 = Registration(student_id = '6406022610032' , subject_id = '060233113', year = '2022' , semester =  '1',grade='+C')
 
@@ -109,3 +109,6 @@ for i in list_information:
     session.add(i)
 
 session.commit()
+
+
+print(session.query(Student.student_id,Student.f_name).all())

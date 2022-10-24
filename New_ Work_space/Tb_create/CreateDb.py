@@ -11,7 +11,7 @@ try:
 
     cursor = connection.cursor()
 
-    sql = """CREATE database Workspace"""
+    sql = """CREATE database Newingwork_space"""
 
     cursor.execute(sql)
 
