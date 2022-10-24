@@ -5,7 +5,7 @@ from Database_orm  import Student,Teachers,Subjects,Registration,session
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']='postgresql://webadmin:YKQnti46682@10.104.9.211:11256/newingwork_space'
+app.config['SQLALCHEMY_DATABASE_URI']='postgresql://webadmin:YKQnti46682@10.104.9.211:5432/newingwork_space'
 app.config['SQLALCHEMY_TRACK_MODIFICATION']= False
 
 
