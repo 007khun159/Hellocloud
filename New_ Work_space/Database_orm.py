@@ -5,7 +5,8 @@ from sqlalchemy.orm import sessionmaker,relationship,backref
 import uuid
 
 
-Engine = sqlalchemy.create_engine('postgresql://webadmin:YKQnti46682@node36984-env-papop.proen.app.ruk-com.cloud:11256/newingwork_space')
+engining = sqlalchemy.create_engine('postgresql://webadmin:YKQnti46682@node36984-env-papop.proen.app.ruk-com.cloud:11256/newingwork_space')
+#engining  = sqlalchemy.create_engine('sqlite:/// workspace.sqlite3')
 Base = declarative_base()
 
 #All Table 
@@ -26,14 +27,14 @@ class Student(Base):
 class Teachers(Base):
     __tablename__ = 'teachers'
     teacher_id = Column(String(3), primary_key=True)
-    f_name = Column(String(20), nullable=False)
-    l_name = Column(String(20), nullable=False)
+    f_tname = Column(String(20), nullable=False)
+    l_tname = Column(String(20), nullable=False)
     email = Column(String(50), nullable=False)
     registing_teacher_id = relationship('Subjects', backref='teacher')  
 
     def __rerp__(self):
         return "<Book(teacher_id= '{}' , f_name ='{}', l_name =  '{}'  , email = '{}' )>"\
-            .format(self.teacher_id , self.f_name , self.l_name , self.email )
+            .format(self.teacher_id , self.f_tname , self.l_tname , self.email )
 
 
 
@@ -69,10 +70,10 @@ class Registration(Base):
 
 
 #Order information to start process
-Base.metadata.drop_all(Engine)
-Base.metadata.create_all(Engine)
+Base.metadata.drop_all(engining)
+Base.metadata.create_all(engining)
 
-Engine_start = sessionmaker(bind= Engine)
+Engine_start = sessionmaker(bind= engining)
 session = Engine_start()
 
 
@@ -84,9 +85,9 @@ student1 = Student(student_id = '6406022610031' , f_name = 'Papop', l_name  = 'S
 student2 = Student(student_id = '6406022610040',f_name = 'Pawarit',l_name = 'Pitirit',email = '6406022610040@fitm.kmutnb.ac.th')
 student3 = Student(student_id = '6406022610032',f_name = 'Nititat',l_name = 'Banpha',email = '6406022610032@fitm.kmutnb.ac.th')
 
-teacher1 = Teachers(teacher_id ='AMK',f_name = 'Anirach',l_name ='Mingkwan',email = 'Anirach@gmail.com')
-teacher2 = Teachers(teacher_id ='WKN',f_name = 'Warachai',l_name ='Kongsiriwatana',email = 'Warachai@gmail.com')
-teacher3 = Teachers(teacher_id ='KNM',f_name = 'Kanitta',l_name ='Namee',email = 'Kanitta@gmail.com')
+teacher1 = Teachers(teacher_id ='AMK',f_tname = 'Anirach',l_tname ='Mingkwan',email = 'Anirach@gmail.com')
+teacher2 = Teachers(teacher_id ='WKN',f_tname = 'Warachai',l_tname ='Kongsiriwatana',email = 'Warachai@gmail.com')
+teacher3 = Teachers(teacher_id ='KNM',f_tname = 'Kanitta',l_tname ='Namee',email = 'Kanitta@gmail.com')
 
 subject1 = Subjects(subject_id = '060233113',subject_name = 'ADVANCED COMPUTER PROGRAMMIN', creadit =  3 ,teacher_id = 'AMK'  )
 subject2 = Subjects(subject_id = '060233201',subject_name = 'NETWORK ENGINEERING LABORATO', creadit =  1 ,teacher_id = 'WKN' )
@@ -94,7 +95,7 @@ subject3 = Subjects(subject_id = '060233205',subject_name = 'ADVANCED NETWORK AN
 
 register1 = Registration(student_id = '6406022610031' , subject_id = '060233113', year = '2022' , semester =  '1',grade='+A')
 register2 = Registration(student_id = '6406022610031' , subject_id = '060233201', year =  '2022' , semester =  '1',grade='C')
-register3 = Registration(student_id = '6406022610040' , subject_id = '060233205', year = '2022' , semester =  '1',grade='B')
+register3 = Registration(student_id = '6406022610040' , subject_id = '060233201', year = '2022' , semester =  '1',grade='B')
 register4 = Registration(student_id = '6406022610040' , subject_id = '060233205', year = '2022' , semester =  '1',grade='A')
 register5 = Registration(student_id = '6406022610032' , subject_id = '060233201', year = '2022' , semester =  '1',grade='+B')
 register6 = Registration(student_id = '6406022610032' , subject_id = '060233113', year = '2022' , semester =  '1',grade='+C')
@@ -111,4 +112,6 @@ for i in list_information:
 session.commit()
 
 
-print(session.query(Student.student_id,Student.f_name).all())
+#print(session.query(Student.student_id,Student.f_name).all())
+#print(session.query(Student.student_id,Student.f_name,Registration.subject_id,Subjects.subject_name,Registration.grade).outerjoin(Registration,Student.student_id == Registration.student_id).outerjoin(Subjects,Registration.subject_id == Subjects.subject_id).all())
+

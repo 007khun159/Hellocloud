@@ -29,8 +29,8 @@ class Student(Base):
 class Teachers(Base):
     __tablename__ = 'teachers'
     teacher_id = Column(String(3),primary_key = True)
-    f_name = Column(String(20), nullable = False)
-    l_name  = Column(String(20),nullable = False)
+    f_tname = Column(String(20), nullable = False)
+    l_tname  = Column(String(20),nullable = False)
     email = Column(String(50),nullable = False)
     subj = relationship('Subjects',backref = 'teachers')
 
@@ -128,10 +128,8 @@ for i in list_4:
 session.commit()
 
 
-#print(session.query(Student.student_id,Student.f_name,Student.l_name,Student.email).all())
-print(session.query(Student.student_id,Student.f_name,Registration.subject_id,Subjects.subject_name,Registration.grade)
-.outerjoin(Registration,Student.student_id == Registration.student_id)
-.outerjoin(Subjects,Registration.subject_id == Subjects.subject_id).all())
+print(session.query(Student.student_id,Student.f_name,Student.l_name,Student.email).all())
+print(session.query(Student.student_id,Student.f_name,Registration.subject_id,Subjects.subject_name,Registration.grade).outerjoin(Registration,Student.student_id == Registration.student_id).outerjoin(Subjects,Registration.subject_id == Subjects.subject_id).all())
 
 
 
